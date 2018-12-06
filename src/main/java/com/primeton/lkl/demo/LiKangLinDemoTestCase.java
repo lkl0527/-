@@ -1,4 +1,4 @@
-package com.primeton;
+package com.primeton.lkl.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -9,11 +9,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableAutoConfiguration
 @EnableSwagger2
-// @ComponentScan(basePackages = { "com.primeton.spring_root_mybatis" })
-public class Application {
+public class LiKangLinDemoTestCase {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(LiKangLinDemoTestCase.class, args);
 	}
 
 }

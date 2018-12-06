@@ -1,9 +1,19 @@
-package com.primeton.utils;
+package com.primeton.lkl.demo.utils;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * 定义密码加密工具类
+ * 
+ * 加密密码
+ * 
+ * @author 李康林
+ * @version 1.0
+ * @date 2018.11.26
+ * 
+ */
 public class Md5Util {
 
 	public static String encode(String oldStr) {

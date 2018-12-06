@@ -1,4 +1,4 @@
-package com.primeton.transactional;
+package com.primeton.lkl.demo.transactional;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
