@@ -11,9 +11,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.primeton.lkl.demo.LiKangLinDemoTestCase;
 import com.primeton.lkl.demo.controller.UserController;
+import com.primeton.lkl.demo.mapper.IUserDao;
 import com.primeton.lkl.demo.model.JsonResponse;
+
 import com.primeton.lkl.demo.model.User;
 import com.primeton.lkl.demo.model.UserAndNewPassword;
+import com.primeton.lkl.demo.model.UserQuery;
+import com.primeton.lkl.demo.model.UserQuery.Criteria;
 import com.primeton.lkl.demo.utils.Md5Util;
 
 @RunWith(SpringRunner.class)
@@ -23,11 +27,14 @@ public class UserTestCase {
 	@Autowired
 	private UserController userController;
 
+	@Autowired
+	private IUserDao userDao;
+
 	@Test
 	public void testUser() throws Exception {
 
 		User user = new User();
-		user.setUserName(UUID.randomUUID().toString());
+		user.setUserName("demo");
 		user.setUserPassword("000000");
 
 		// 创建用户
@@ -39,12 +46,16 @@ public class UserTestCase {
 		// 获取用户
 		testGetUser(user);
 		// 获取所有用户
-		 testQueryUsers();
+		testQueryUsers();
 		// 删除用户
 		testRemoveUser(user);
 	}
 
 	private void testCreateUser(User user) throws Exception {
+		UserQuery userQuery = new UserQuery();
+		Criteria criteria = userQuery.createCriteria();
+		criteria.andUserNameEqualTo("demo");
+		userDao.deleteByExample(userQuery);
 		userController.createUser(user);
 		Assert.assertNotNull("测试用户创建", user.getUserId());
 	}
@@ -60,7 +71,11 @@ public class UserTestCase {
 	}
 
 	private void testModifyUser(User user) throws Exception {
-		String name = UUID.randomUUID().toString();
+		UserQuery userQuery = new UserQuery();
+		Criteria criteria = userQuery.createCriteria();
+		criteria.andUserNameEqualTo("demo2");
+		userDao.deleteByExample(userQuery);
+		String name = "demo2";
 		user.setUserName(name);
 		user.setUserPassword(null);
 		JsonResponse modifyUser = userController.modifyUser(user);
