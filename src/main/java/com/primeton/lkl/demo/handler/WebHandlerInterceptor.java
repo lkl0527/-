@@ -18,7 +18,7 @@ public class WebHandlerInterceptor implements org.springframework.web.servlet.Ha
 
 		HttpSession session = request.getSession();
 		// 定义一个数组,对其中的路径直接放行
-		String[] list = new String[] { "/test", "/api/users/actions/login", "/valid_code"
+		String[] list = new String[] { "/test", "/api/users/actions/login", "/valid_code","/api/users/actions/logout"
 				// 登录或者注册时候的图片验证码,
 		};
 		for (int i = 0; i < list.length; i++) {
