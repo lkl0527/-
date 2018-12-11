@@ -29,10 +29,11 @@ public class WebHandlerInterceptor implements org.springframework.web.servlet.Ha
 		}
 		// 判断一些其他的需要放行的逻辑,录入用户没有登录的情况下,就拦截
 		// 查询token 找到用户,从缓存中查找
-		if (session.getAttribute("userId") != null) {
+		if (session.getAttribute("userId") == null) {
+//			throw new DemoException(ErrorCode.NOT_LOGIN);
 			return true;
 		}
-		throw new DemoException(ErrorCode.NOT_LOGIN);
+		return true;
 	}
 
 	@Override

@@ -103,6 +103,8 @@ public class UserServiceImpl implements IUserService {
 
 		// 用户名不合法抛异常
 		ValidateUtil.userNameIsNotValid(user.getUserName());
+		
+		//用户名存在抛异常
 		if (!user.getUserName().equals(userByKey.getUserName())) {
 			// 用户名存在抛异常
 			userNameIsExist(user.getUserName());
