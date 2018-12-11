@@ -38,11 +38,9 @@ public class OrgaServiceImpl implements IOrgaService {
 	/**
 	 * 添加组织
 	 * 
-	 * @param orga
-	 *            组织数据
+	 * @param orga 组织数据
 	 * @return 添加结果
-	 * @throws Exception
-	 *             异常信息
+	 * @throws Exception 异常信息
 	 * 
 	 */
 	@Override
@@ -61,11 +59,9 @@ public class OrgaServiceImpl implements IOrgaService {
 	/**
 	 * 删除组织
 	 * 
-	 * @param orgaId
-	 *            组织Id
+	 * @param orgaId 组织Id
 	 * @return 删除结果
-	 * @throws Exception
-	 *             异常信息
+	 * @throws Exception 异常信息
 	 * 
 	 */
 	@Override
@@ -90,11 +86,9 @@ public class OrgaServiceImpl implements IOrgaService {
 	/**
 	 * 修改组织
 	 * 
-	 * @param orga
-	 *            组织信息
+	 * @param orga 组织信息
 	 * @return 修改之后组织信息
-	 * @throws Exception
-	 *             异常信息
+	 * @throws Exception 异常信息
 	 * 
 	 */
 	@Override
@@ -121,8 +115,7 @@ public class OrgaServiceImpl implements IOrgaService {
 	 * 查询所有组织
 	 * 
 	 * @return 组织集合
-	 * @throws Exception
-	 *             异常信息
+	 * @throws Exception 异常信息
 	 * 
 	 */
 	@Override
@@ -138,11 +131,9 @@ public class OrgaServiceImpl implements IOrgaService {
 	/**
 	 * 根据orgaId获取组织
 	 * 
-	 * @param orgaId
-	 *            组织Id
+	 * @param orgaId 组织Id
 	 * @return 组织信息
-	 * @throws Exception
-	 *             异常信息
+	 * @throws Exception 异常信息
 	 * 
 	 */
 	@Override
@@ -156,10 +147,8 @@ public class OrgaServiceImpl implements IOrgaService {
 	/**
 	 * 判断组织名是否重复
 	 * 
-	 * @param orga
-	 *            组织数据
-	 * @throws Exception
-	 *             异常信息
+	 * @param orga 组织数据
+	 * @throws Exception 异常信息
 	 * 
 	 */
 	private void orgaNameIsExist(Orga orga) throws Exception {
@@ -203,8 +192,7 @@ public class OrgaServiceImpl implements IOrgaService {
 	/**
 	 * 填充一个节点的子节点
 	 * 
-	 * @param orga
-	 *            组织Id
+	 * @param orga 组织Id
 	 * @return 返回填充好的子节点列表
 	 * 
 	 */

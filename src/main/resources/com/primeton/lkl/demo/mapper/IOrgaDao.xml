@@ -81,99 +81,7 @@
 		</if>
 	</sql>
 
-	<select id="getParentOrga" resultMap="BaseResultMap">
-		select
-		<include refid="Base_Column_List" />
-		from likl_orga where ORGA_PARENT IS NULL
-	</select>
-
-	<select id="getChildrenOrga" parameterType="java.lang.Integer"
-		resultMap="BaseResultMap">
-		select
-		ORGA_ID, ORGA_NAME, ORGA_DESC, ORGA_PARENT
-		from
-		likl_orga where ORGA_PARENT =
-		#{orgaParent,jdbcType=INTEGER}
-	</select>
-	
-	<select id="selectOrgaNotOrgas" parameterType="java.lang.Integer"
-		resultType="java.lang.Integer">
-		select
-		count(-1)
-		from likl_orga
-		where (ORGA_ID in (
-		select
-		ORGA_ID
-		from likl_orga
-		where ORGA_PARENT = #{orgaId,jdbcType=INTEGER}))
-		or
-		ORGA_ID
-		= #{orgaId,jdbcType=INTEGER}
-	</select>
-
-	<select id="selectOrgaNotUsers" parameterType="java.lang.Integer"
-		resultType="java.lang.Integer">
-		select
-		count(-1)
-		from likl_user U
-		where (ORGA_ID in (
-		select
-		ORGA_ID
-		from likl_orga
-		where ORGA_PARENT = #{orgaId,jdbcType=INTEGER}))
-		or
-		U.ORGA_ID
-		= #{orgaId,jdbcType=INTEGER}
-	</select>
-	
-		
-	
-
-	<select id="selectByExample" resultMap="BaseResultMap"
-		parameterType="com.primeton.lkl.demo.model.OrgaQuery">
-		select
-		<if test="distinct">
-			distinct
-		</if>
-		<include refid="Base_Column_List" />
-		from likl_orga
-		<if test="_parameter != null">
-			<include refid="Example_Where_Clause" />
-		</if>
-		<if test="orderByClause != null">
-			order by ${orderByClause}
-		</if>
-	</select>
-	<select id="getOrga" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-		select
-		ORGA_ID,ORGA_NAME,ORGA_DESC,ORGA_PARENT
-		from
-		likl_orga
-		where
-		ORGA_ID = #{orgaId,jdbcType=INTEGER}
-	</select>
-	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from
-		likl_orga
-		where ORGA_ID = #{orgaId,jdbcType=INTEGER}
-	</delete>
-	<delete id="deleteByExample" parameterType="com.primeton.lkl.demo.model.OrgaQuery">
-		delete from likl_orga
-		<if test="_parameter != null">
-			<include refid="Example_Where_Clause" />
-		</if>
-	</delete>
-	<insert id="insert" parameterType="com.primeton.lkl.demo.model.Orga">
-		insert into likl_orga
-		(ORGA_ID,
-		ORGA_NAME, ORGA_DESC,
-		ORGA_PARENT)
-		values
-		(#{orgaId,jdbcType=INTEGER},
-		#{orgaName,jdbcType=VARCHAR},
-		#{orgaDesc,jdbcType=VARCHAR},
-		#{orgaParent,jdbcType=INTEGER})
-	</insert>
+	<!-- 新增组织 -->
 	<insert id="insertSelective" parameterType="com.primeton.lkl.demo.model.Orga">
 		insert into likl_orga
 		<selectKey keyProperty="orgaId" resultType="java.lang.Integer"
@@ -210,46 +118,15 @@
 			</if>
 		</trim>
 	</insert>
-	<select id="countByExample" parameterType="com.primeton.lkl.demo.model.OrgaQuery"
-		resultType="java.lang.Integer">
-		select count(*) from likl_orga
-		<if test="_parameter != null">
-			<include refid="Example_Where_Clause" />
-		</if>
-	</select>
-	<update id="updateByExampleSelective" parameterType="map">
-		update likl_orga
-		<set>
-			<if test="record.orgaId != null">
-				ORGA_ID = #{record.orgaId,jdbcType=INTEGER},
-			</if>
-			<if test="record.orgaName != null">
-				ORGA_NAME = #{record.orgaName,jdbcType=VARCHAR},
-			</if>
-			<if test="record.orgaDesc != null">
-				ORGA_DESC = #{record.orgaDesc,jdbcType=VARCHAR},
-			</if>
-			<if test="record.orgaParent != null">
-				ORGA_PARENT = #{record.orgaParent,jdbcType=INTEGER},
-			</if>
-		</set>
-		<if test="_parameter != null">
-			<include refid="Update_By_Example_Where_Clause" />
-		</if>
-	</update>
-	<update id="updateByExample" parameterType="map">
-		update likl_orga
-		set ORGA_ID = #{record.orgaId,jdbcType=INTEGER},
-		ORGA_NAME =
-		#{record.orgaName,jdbcType=VARCHAR},
-		ORGA_DESC =
-		#{record.orgaDesc,jdbcType=VARCHAR},
-		ORGA_PARENT =
-		#{record.orgaParent,jdbcType=INTEGER}
-		<if test="_parameter != null">
-			<include refid="Update_By_Example_Where_Clause" />
-		</if>
-	</update>
+
+	<!-- 删除组织 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		likl_orga
+		where ORGA_ID = #{orgaId,jdbcType=INTEGER}
+	</delete>
+
+	<!-- 修改组织 -->
 	<update id="updateByPrimaryKeySelective" parameterType="com.primeton.lkl.demo.model.Orga">
 		update likl_orga
 		<set>
@@ -265,15 +142,81 @@
 		</set>
 		where ORGA_ID = #{orgaId,jdbcType=INTEGER}
 	</update>
-	<update id="updateByPrimaryKey" parameterType="com.primeton.lkl.demo.model.Orga">
-		update likl_orga
-		set
-		ORGA_NAME = #{orgaName,jdbcType=VARCHAR},
-		ORGA_DESC =
-		#{orgaDesc,jdbcType=VARCHAR},
-		ORGA_PARENT =
+
+	<!-- 查询所有组织 -->
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.primeton.lkl.demo.model.OrgaQuery">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from likl_orga
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+
+	<!-- 根据orgaId获取组织 -->
+	<select id="getOrga" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		ORGA_ID,ORGA_NAME,ORGA_DESC,ORGA_PARENT
+		from
+		likl_orga
+		where
+		ORGA_ID = #{orgaId,jdbcType=INTEGER}
+	</select>
+
+	<!--获取所有父节点组织 -->
+	<select id="getParentOrga" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from likl_orga where ORGA_PARENT IS NULL
+	</select>
+
+	<!-- 根据父节点组织Id获取子组织信息 -->
+	<select id="getChildrenOrga" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		ORGA_ID, ORGA_NAME, ORGA_DESC, ORGA_PARENT
+		from
+		likl_orga where ORGA_PARENT =
 		#{orgaParent,jdbcType=INTEGER}
-		where ORGA_ID =
-		#{orgaId,jdbcType=INTEGER}
-	</update>
+	</select>
+
+	<!-- 查询组织下是否有用户 -->
+	<select id="selectOrgaNotUsers" parameterType="java.lang.Integer"
+		resultType="java.lang.Integer">
+		select
+		count(-1)
+		from likl_user U
+		where (ORGA_ID in (
+		select
+		ORGA_ID
+		from likl_orga
+		where ORGA_PARENT = #{orgaId,jdbcType=INTEGER}))
+		or
+		U.ORGA_ID
+		= #{orgaId,jdbcType=INTEGER}
+	</select>
+
+	<!-- 查询组织下的组织 -->
+	<select id="selectOrgaNotOrgas" parameterType="java.lang.Integer"
+		resultType="java.lang.Integer">
+		select
+		count(-1)
+		from likl_orga
+		where (ORGA_ID in (
+		select
+		ORGA_ID
+		from likl_orga
+		where ORGA_PARENT = #{orgaId,jdbcType=INTEGER}))
+		or
+		ORGA_ID
+		= #{orgaId,jdbcType=INTEGER}
+	</select>
+
 </mapper>

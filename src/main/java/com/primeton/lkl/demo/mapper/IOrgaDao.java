@@ -36,10 +36,9 @@ public interface IOrgaDao {
 	 * 删除组织
 	 * 
 	 * @param orgaId 组织Id
-	 * @return 删除结果
-	 * 
+	 * @return
 	 */
-	int deleteByExample(OrgaQuery example);
+	int deleteByPrimaryKey(Integer orgaId);
 
 	/**
 	 * 修改组织
@@ -48,7 +47,7 @@ public interface IOrgaDao {
 	 * @return 修改之后组织信息
 	 * 
 	 */
-	int updateByPrimaryKey(Orga record);
+	int updateByPrimaryKeySelective(Orga record);
 
 	/**
 	 * 查询所有组织
@@ -91,7 +90,7 @@ public interface IOrgaDao {
 	 * @return
 	 */
 	int selectOrgaNotOrgas(Integer orgaId);
-	
+
 	/**
 	 * 查询组织下是否有用户
 	 * 
@@ -99,19 +98,5 @@ public interface IOrgaDao {
 	 * @return
 	 */
 	int selectOrgaNotUsers(Integer orgaId);
-
-	int countByExample(OrgaQuery example);
-
-	int deleteByPrimaryKey(Integer orgaId);
-
-	int insert(Orga record);
-
-	int updateByExampleSelective(@Param("record") Orga record, @Param("example") OrgaQuery example);
-
-	int updateByExample(@Param("record") Orga record, @Param("example") OrgaQuery example);
-
-	int updateByPrimaryKeySelective(Orga record);
-
-	
 
 }

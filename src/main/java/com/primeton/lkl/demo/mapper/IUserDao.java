@@ -41,6 +41,14 @@ public interface IUserDao {
 	int deleteUserById(@Param(value = "userId") Integer userId);
 
 	/**
+	 * 根据条件删除用户
+	 * 
+	 * @param example 用户信息
+	 * @return
+	 */
+	int deleteByExample(UserQuery example);
+
+	/**
 	 * 修改用户
 	 * 
 	 * @param user 用户信息
@@ -85,7 +93,7 @@ public interface IUserDao {
 	 * @return 用户数据
 	 */
 	List<User> queryUsers(@Param("userName") String userName, @Param("orgaId") Integer orgaId);
-	
+
 	/**
 	 * 根据组织Id查询用户
 	 * 
@@ -94,23 +102,5 @@ public interface IUserDao {
 	 * @return
 	 */
 	List<User> selectOrgaUsers(@Param("userName") String userName, @Param("orgaId") Integer orgaId);
-
-	int countByExample(UserQuery example);
-
-	int deleteByExample(UserQuery example);
-
-	int deleteByPrimaryKey(Integer userId);
-
-	int insert(User record);
-
-	User selectByPrimaryKey(Integer userId);
-
-	int updateByExampleSelective(@Param("record") User record, @Param("example") UserQuery example);
-
-	int updateByExample(@Param("record") User record, @Param("example") UserQuery example);
-
-	int updateByPrimaryKeySelective(User record);
-
-	int updateByPrimaryKey(User record);
 
 }

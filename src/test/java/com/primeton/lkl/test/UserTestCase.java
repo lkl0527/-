@@ -1,7 +1,5 @@
 package com.primeton.lkl.test;
 
-import java.util.UUID;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,11 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.primeton.lkl.demo.LiKangLinDemoTestCase;
+import com.primeton.lkl.demo.LikanglinDemoApplication;
 import com.primeton.lkl.demo.controller.UserController;
 import com.primeton.lkl.demo.mapper.IUserDao;
 import com.primeton.lkl.demo.model.JsonResponse;
-
 import com.primeton.lkl.demo.model.User;
 import com.primeton.lkl.demo.model.UserAndNewPassword;
 import com.primeton.lkl.demo.model.UserQuery;
@@ -21,7 +18,7 @@ import com.primeton.lkl.demo.model.UserQuery.Criteria;
 import com.primeton.lkl.demo.utils.Md5Util;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = LiKangLinDemoTestCase.class)
+@SpringBootTest(classes = LikanglinDemoApplication.class)
 public class UserTestCase {
 
 	@Autowired

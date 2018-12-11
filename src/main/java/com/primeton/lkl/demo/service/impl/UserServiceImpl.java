@@ -96,7 +96,7 @@ public class UserServiceImpl implements IUserService {
 		ValidateUtil.paramIsNotEmpty(user.getUserId(), ErrorCode.USERID_IS_NULL);
 
 		// 传入的用户Id不存在抛异常
-		User userByKey = userDao.selectByPrimaryKey(user.getUserId());
+		User userByKey = userDao.getUserById(user.getUserId());
 		if (userByKey == null) {
 			throw new DemoException(ErrorCode.USER_IS_NULL);
 		}

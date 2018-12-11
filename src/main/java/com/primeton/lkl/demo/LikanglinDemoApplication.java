@@ -9,10 +9,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableAutoConfiguration
 @EnableSwagger2
-public class LiKangLinDemoTestCase {
+public class LikanglinDemoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LiKangLinDemoTestCase.class, args);
+		SpringApplication.run(LikanglinDemoApplication.class, args);
 	}
 
 }
