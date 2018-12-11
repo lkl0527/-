@@ -18,7 +18,7 @@ public class WebHandlerInterceptor implements org.springframework.web.servlet.Ha
 
 		HttpSession session = request.getSession();
 		// 定义一个数组,对其中的路径直接放行
-		String[] list = new String[] { "/test", "/api/users/actions/login", "/valid_code","/api/orgas/actions/nested"
+		String[] list = new String[] { "/test", "/api/users/actions/login", "/valid_code", "/api/orgas/actions/nested"
 				// 登录或者注册时候的图片验证码,
 		};
 		for (int i = 0; i < list.length; i++) {
@@ -29,11 +29,10 @@ public class WebHandlerInterceptor implements org.springframework.web.servlet.Ha
 		}
 		// 判断一些其他的需要放行的逻辑,录入用户没有登录的情况下,就拦截
 		// 查询token 找到用户,从缓存中查找
-		if (session.getAttribute("userId") == null) {
-//			throw new DemoException(ErrorCode.NOT_LOGIN);
+		if (session.getAttribute("userId") != null) {
 			return true;
 		}
-		return true;
+		throw new DemoException(ErrorCode.NOT_LOGIN);
 	}
 
 	@Override
